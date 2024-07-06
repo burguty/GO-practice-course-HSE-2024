@@ -10,8 +10,7 @@ import (
 // 11
 func from_c_to_f(celsius float64) float64 {
 	if celsius < -273.15 {
-		fmt.Println("The absolute zero has been reached!")
-		return -1000
+		panic("The absolute zero has been reached!")
 	}
 	return celsius*9/5 + 32
 }
@@ -20,13 +19,8 @@ func from_c_to_f(celsius float64) float64 {
 func countdown() {
 	var n int
 	_, err := fmt.Scanln(&n)
-	if err != nil {
-		fmt.Println("Expected natural number!")
-		return
-	}
-	if n < 1 {
-		fmt.Println("Expected natural number!")
-		return
+	if err != nil || n < 1 {
+		panic("Expected natural number!")
 	}
 	for i := n; i > 0; i-- {
 		fmt.Println(i)
@@ -43,7 +37,7 @@ func len_string(s string) int {
 }
 
 // 14
-func contains(arr []int, element int) bool {
+func contains[T comparable](arr []T, element T) bool {
 	for _, a := range arr {
 		if a == element {
 			return true
@@ -61,23 +55,20 @@ func enter_for_contains() {
 
 	_, err := fmt.Scan(&n)
 	if err != nil || n < 0 {
-		fmt.Println("Expected integer number >= 0!")
-		return
+		panic("Expected integer number >= 0!")
 	}
 	for i := 0; i < n; i++ {
 		var a int
 		_, err := fmt.Scan(&a)
 		if err != nil {
-			fmt.Println("Expected number!")
-			return
+			panic("Expected number!")
 		}
 		arr = append(arr, a)
 	}
 
 	_, err = fmt.Scan(&query)
 	if err != nil {
-		fmt.Println("Expected number!")
-		return
+		panic("Expected number!")
 	}
 
 	if contains(arr, query) {
@@ -88,10 +79,9 @@ func enter_for_contains() {
 }
 
 // 15
-func average(arr []float64) float64 {
+func average(arr []int) float64 {
 	if len(arr) == 0 {
-		fmt.Println("Empty array!")
-		return 0.0
+		panic("Empty array!")
 	}
 	sum := 0.0
 	for _, a := range arr {
@@ -102,20 +92,18 @@ func average(arr []float64) float64 {
 
 func enter_for_average() {
 	var (
-		arr []float64
+		arr []int
 		n   int
 	)
 	_, err := fmt.Scan(&n)
 	if err != nil || n < 0 {
-		fmt.Println("Expected integer number >= 0!")
-		return
+		panic("Expected integer number >= 0!")
 	}
 	for i := 0; i < n; i++ {
-		var a float64
+		var a int
 		_, err := fmt.Scan(&a)
 		if err != nil {
-			fmt.Println("Expected number!")
-			return
+			panic("Expected number!")
 		}
 		arr = append(arr, a)
 	}
@@ -126,9 +114,8 @@ func enter_for_average() {
 func multiply_table() {
 	var n int
 	_, err := fmt.Scan(&n)
-	if err != nil || n < 1 || n > 10 {
-		fmt.Println("Expected natural number!")
-		return
+	if err != nil {
+		panic("Expected integer number!")
 	}
 	for i := 1; i < 11; i++ {
 		fmt.Println(n, "x", i, "=", n*i)
@@ -167,8 +154,7 @@ func min_max(arr []int) (int, int) {
 // 19
 func erase_element(arr *[]int, index int) {
 	if index < 0 || index >= len(*arr) {
-		fmt.Println("Index out of range!")
-		return
+		panic("Index out of range!")
 	}
 	*arr = append((*arr)[:index], (*arr)[index+1:]...)
 }

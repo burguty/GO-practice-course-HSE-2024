@@ -46,8 +46,7 @@ func factorial(x int) int {
 // 6
 func is_vowel(a rune) bool {
 	if !unicode.IsLetter(a) {
-		fmt.Println("Not a letter")
-		return false
+		panic("Not a letter")
 	}
 	return strings.Contains("aieuoAIEUOаоуэыяёюеиАОУЭЫЯЁЮЕИ", string(a))
 }
