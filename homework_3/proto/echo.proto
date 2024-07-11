@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option go_package = "homework_3/proto";
+
+package proto;
+
+service Bank {
+  rpc CreateAccount (CreateAccountRequest) returns (CreateAccountReply) {}
+  rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountReply) {}
+  rpc UpdateAmount (UpdateAmountRequest) returns (UpdateAmountReply) {}
+  rpc UpdateName (UpdateNameRequest) returns (UpdateNameReply) {}
+  rpc GetAccount (GetAccountRequest) returns (GetAccountReply) {}
+}
+
+// Requests
+message CreateAccountRequest {
+  string name = 1;
+}
+
+message DeleteAccountRequest {
+  string name = 1;
+}
+
+message UpdateAmountRequest {
+  string name = 1;
+  sint64 amount = 2;
+}
+
+message UpdateNameRequest {
+  string name = 1;
+  string new_name = 2;
+}
+
+message GetAccountRequest {
+  string name = 1;
+}
+
+// Replies
+message CreateAccountReply {
+  string message = 1;
+}
+
+message DeleteAccountReply {
+  string message = 1;
+}
+
+message UpdateAmountReply {
+  string message = 1;
+}
+
+message UpdateNameReply {
+  string message = 1;
+}
+
+message GetAccountReply {
+  string message = 1;
+}
