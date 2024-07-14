@@ -61,6 +61,9 @@ func (db *AccountDatabase) UpdateName(name string, newName string) error {
 	if _, ok := db.data[name]; !ok {
 		return errors.New(fmt.Sprintf("Account with name '%s' not found", name))
 	}
+	if _, ok := db.data[newName]; ok {
+		return errors.New(fmt.Sprintf("Account with name '%s' already exists", newName))
+	}
 	account := db.data[name]
 	account.Name = newName
 	delete(db.data, name)
